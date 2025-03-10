@@ -6,16 +6,19 @@ import Notes from "./Notes/Notes"
 
 function App() {
  
-    const [data, setData] = useState([]);
- 
+  const [data, setData] = useState([]);
+  
+  
   useEffect(() => {
-    axios.get("http://127.0.0.1:5001")
+    axios.get("http://127.0.0.1:5001/get")
       .then(response => {
-        console.log("Response:", response.data);  
-        setData(response.data);  
+        setData(response.data); 
+        console.log(response.data) 
+      })
+      .catch((error) =>{
+        console.error("An error occurred:", error);
       })
   }, []);  
-
 
 
   return (
@@ -23,7 +26,6 @@ function App() {
       <Notes notes={data} />
     </div>
   );
-
 };
 
-export default App
+export default App;
